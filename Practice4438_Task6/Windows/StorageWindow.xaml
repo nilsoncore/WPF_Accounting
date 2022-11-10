@@ -1,0 +1,55 @@
+﻿<Window x:Class="Practice4438_Task6.StorageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Пункты выдачи" Closing="close" Height="450" Width="800" WindowStartupLocation="CenterScreen" Style="{StaticResource Window}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Border Name="BorderUp" Style="{StaticResource Border}" />
+        <Border Name="BorderDown" Grid.Row="2" Style="{StaticResource Border}" />
+
+        <TextBlock Style="{StaticResource TextBig}" Text="Здесь вы можете просматривать и добавлять пункты выдачи" />
+
+        <ListView Grid.Row="1" HorizontalContentAlignment="Center" FontFamily="Roboto" FontSize="22" Name="StorageList" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+            
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+            
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" />
+                        <GridViewColumn Header="Населенный пункт" DisplayMemberBinding="{Binding Locality}" />
+                        <GridViewColumn Header="Регион России" DisplayMemberBinding="{Binding Region}" />
+
+                        <GridViewColumn Header="Страна отправки">
+                            <GridViewColumn.DisplayMemberBinding>
+                                <MultiBinding StringFormat="{}(ID: {0}) {1}">
+                                    <Binding Path="CountryId"></Binding>
+                                    <Binding Path="Country.Name"></Binding>
+                                </MultiBinding>
+                            </GridViewColumn.DisplayMemberBinding>
+                        </GridViewColumn>
+                        
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+            
+        </ListView>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button Name="BackButton" Style="{StaticResource button}" Click="BackToMainWindow" Content="Назад" />
+            <Button Name="AddButton" Style="{StaticResource button}" Click="AddDeliveryNote" Content="Добавить" />
+        </StackPanel>
+    </Grid>
+</Window>

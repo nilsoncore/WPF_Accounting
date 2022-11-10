@@ -1,0 +1,75 @@
+﻿<Window x:Class="Practice4438_Task6.DeliveryNoteChangeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Изменение накладной" WindowStartupLocation="CenterScreen" Closing="close" Height="500" Width="500" Style="{StaticResource Window}">
+    <Grid MinWidth="170">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Border Name="BorderUp" Grid.Row="0" Style="{StaticResource Border}" />
+        <Border Name="BorderDown" Grid.Row="2" Style="{StaticResource Border}" />
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Style="{StaticResource TextBig}" HorizontalAlignment="Center" Text="Изменение накладной"></TextBlock>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center" Margin="20">
+            
+            <!-- Price -->
+            <TextBlock Style="{StaticResource TextStandart}" Text="Цена:" />
+            <TextBox Name="DeliveryPrice" Margin="5" Style="{StaticResource TextBox}" />
+            
+            <!-- Date -->
+            <TextBlock Style="{StaticResource TextStandart}" Text="Дата заказа:" />
+            <DatePicker Name="DeliveryDate" Margin="5" FontFamily="Roboto" FontSize="22" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+
+            <!-- Count -->
+            <TextBlock VerticalAlignment="Top" Style="{StaticResource TextStandart}" Text="Количество:" />
+            <TextBox Name="DeliveryCount" Margin="5" Style="{StaticResource TextBox}" />
+            
+            <!-- DestinationId -->
+            <TextBlock Style="{StaticResource TextStandart}" Text="Пункт получения:" />
+            <ComboBox Style="{StaticResource combo}" Name="DeliveryDestination" Margin="5">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Style="{StaticResource TextStandart}">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} - {1}">
+                                    <Binding Path="Locality"></Binding>
+                                    <Binding Path="Region"></Binding>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            
+            <!-- BuyerId -->
+            <TextBlock Style="{StaticResource TextStandart}" Text="Заказчик:" />
+            <ComboBox Style="{StaticResource combo}" Name="DeliveryBuyer" Margin="5">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Style="{StaticResource TextStandart}">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0}">
+                                    <Binding Path="Name"></Binding>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button Click="ChangeDeliveryNote" Style="{StaticResource button}" Content="Сохранить" Padding="10,5,10,5" />
+        </StackPanel>
+
+    </Grid>
+</Window>

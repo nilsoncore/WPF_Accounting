@@ -1,0 +1,51 @@
+﻿<Window x:Class="Practice4438_Task6.StorageAddWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Окно добавления пункта выдачи" Closing="close" Height="400" Width="400" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Border Name="BorderUp" Grid.Row="0" Style="{StaticResource Border}" />
+        <Border Name="BorderDown" Grid.Row="2" Style="{StaticResource Border}" />
+
+        <TextBlock Style="{StaticResource TextBig}" HorizontalAlignment="Center" Text="Добавление пункта выдачи" />
+        
+        <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center" Margin="20">
+            <!-- Locality -->
+            <TextBlock Style="{StaticResource TextStandart}" Text="Населенный пункт:" />
+            <TextBox Name="DestinationLocality" Margin="5" Style="{StaticResource TextBox}" />
+
+            <!-- Region -->
+            <TextBlock Style="{StaticResource TextStandart}" Text="Регион России:" />
+            <TextBox Name="DestinationRegion" Margin="5" Style="{StaticResource TextBox}" />
+
+            <!-- CountryId -->
+            <TextBlock Style="{StaticResource TextStandart}" Text="Страна отправки:" />
+            <ComboBox Style="{StaticResource combo}" Name="DestinationCountry" Margin="5">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Style="{StaticResource TextStandart}">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0}">
+                                    <Binding Path="Name"></Binding>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button Click="AddStorage" Style="{StaticResource button}" Content="Добавить" Grid.Row="2" />
+        </StackPanel>
+
+    </Grid>
+</Window>
